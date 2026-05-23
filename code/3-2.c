@@ -12,7 +12,7 @@ int main(int argc, const char* argv[]) {
     if (fp == NULL)
         return 0;
 
-    fscanf(fp, "%s", buffer);
+    fscanf(fp, "%9s", buffer);
     fclose(fp);
 
     printf("%s\n", buffer);
