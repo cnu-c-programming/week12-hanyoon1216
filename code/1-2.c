@@ -6,7 +6,7 @@ int main(int argc, const char* argv[]) {
 
     for (int i = 1; i < argc; i++) {
         const char* filename = argv[i];
-        char buffer[256] = {0;};
+        char buffer[256] = {0};
 
         FILE* fp = fopen(filename, "r");
         if (fp == NULL)
@@ -17,6 +17,6 @@ int main(int argc, const char* argv[]) {
 
         printf("%s\n", buffer);
     }
-
+    
     return 0;
 }
