@@ -8,8 +8,21 @@ int main(int argc, const char* argv[]) {
         return 0;
     }
 
-
+    char line[256];
     int sum = 0;
+
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        char* endptr;
+        long val = strtol(line, &endptr, 10);
+
+        if (endptr == line || (*endptr != '\n' && *endptr != '\0')) {
+            line[strcspn(line, "\n")] = '\0';
+            fprintf(stderr, "invalid input %s\n", line);
+        }
+        else {
+            sum += (int)val;
+        }
+    }
 
 
     printf("sum: %d\n", sum);
