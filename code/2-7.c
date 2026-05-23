@@ -11,17 +11,20 @@ typedef struct config {
 
 void config_parser(Config* config_ptr) {
     FILE* fp = fopen("config.txt", "r");
+    char line[256];
     char key[64], value[64];
 
-    while (fscanf(fp, "%63[^=]=%63s", key, value) == 2) {
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        if (sscanf(line, "%63[^=]=%63s", key, value) != 2)
+            continue;
         if (strcmp(key, "InputFileName") == 0)
-            strcpy(config_ptr -> InputFileName, value);
-        else if (strcmp(key, "Option") == 0)
-            config_ptr -> Options = atoi(value);
+            strcpy(config_ptr->InputFileName, value);
+        else if (strcmp(key, "Options") == 0)
+            config_ptr->Options = atoi(value);
         else if (strcmp(key, "SectionName") == 0)
-            strcpy(config_ptr -> SectionName, value);
+            strcpy(config_ptr->SectionName, value);
         else if (strcmp(key, "Address") == 0)
-            config_ptr -> Address = strtoull(value, NULL, 16);
+            config_ptr->Address = strtoull(value, NULL, 16);
     }
     fclose(fp);
 }
